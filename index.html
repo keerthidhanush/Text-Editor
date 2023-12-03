@@ -81,6 +81,22 @@
                 <img src="Resourses/Font-color-icon.png" width="24" height="20">
             </label>
 
+            <button type="button" id="button" onclick="alignText('left')">
+                <img src="Resourses/left.png" width="15" height="15" >
+            </button>
+
+            <button type="button" id="button" onclick="alignText('center')">
+                <img src="Resourses/center.png" width="15" height="15" >
+            </button>
+
+            <button type="button" id="button" onclick="alignText('right')">
+                <img src="Resourses/right.png" width="15" height="15" ></button>
+                
+            <button type="button" id="button" onclick="alignText('justify')">
+                <img src="Resourses/justify.png" width="15" height="15" >
+            </button>
+
+
         </div>
     </center> 
 
@@ -106,6 +122,19 @@
     fontColor.addEventListener('input', () => {
         buttfun('foreColor', fontColor.value);
     });
+
+
+    function alignText(align) {
+    const validAlignments = ['left', 'center', 'right', 'justify'];
+    const editor = document.getElementById('textarea'); 
+
+    if (validAlignments.includes(align)) {
+        editor.style.textAlign = align;
+        saveState(); 
+    } else {
+        console.error('Invalid alignment value provided.');
+    }
+    }
 
     </script>
     
