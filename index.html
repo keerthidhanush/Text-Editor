@@ -96,6 +96,9 @@
                 <img src="Resourses/justify.png" width="15" height="15" >
             </button>
 
+            <button type="button" id="button" onclick="undo()"><img src="Resourses/undo-4-32.png" width="15" height="15" ></button>
+            <button type="button" id="button" onclick="redo()"><img src="Resourses/action-redo-32.png" width="15" height="15" ></button>
+
 
         </div>
     </center> 
@@ -106,6 +109,9 @@
    
     
     <script>
+
+    let undoStack = [];
+    let redoStack = [];
 
     const editor = document.getElementById('textarea');
     function buttfun(command, value = null) {
@@ -134,6 +140,27 @@
     } else {
         console.error('Invalid alignment value provided.');
     }
+    }
+    
+    function saveState() {
+      const content = editor.innerHTML;
+      undoStack.push(content);
+    }
+
+    function undo() {
+      if (undoStack.length > 1) {
+        redoStack.push(undoStack.pop());
+        const content = undoStack[undoStack.length - 1];
+        editor.innerHTML = content;
+      }
+    }
+
+    function redo() {
+      if (redoStack.length > 0) {
+        const content = redoStack.pop();
+        editor.innerHTML = content;
+        undoStack.push(content);
+      }
     }
 
     </script>
